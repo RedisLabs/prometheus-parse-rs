@@ -120,7 +120,7 @@ impl<'a> LineInfo<'a> {
     }
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Sample {
     pub metric: String,
     pub value: Value,
@@ -151,19 +151,19 @@ fn parse_bucket(s: &str, label: &str) -> Option<(Labels, f64)> {
     value.map(|v| (Labels(labs), v))
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct HistogramCount {
     pub less_than: f64,
     pub count: f64,
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct SummaryCount {
     pub quantile: f64,
     pub count: f64,
 }
 
-#[derive(Debug, Eq, PartialEq)]
+#[derive(Debug, Clone, Eq, PartialEq)]
 pub struct Labels(HashMap<String, String>);
 
 impl Labels {
@@ -214,7 +214,7 @@ impl core::fmt::Display for Labels {
     }
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum Value {
     Counter(f64),
     Gauge(f64),
