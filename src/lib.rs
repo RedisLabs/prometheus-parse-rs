@@ -5,7 +5,7 @@ use regex::Regex;
 
 use std::collections::{BTreeMap, HashMap};
 use std::io;
-use std::ops::Deref;
+use std::ops::{Deref, DerefMut};
 
 lazy_static! {
     static ref HELP_RE: Regex = Regex::new(r"^#\s+HELP\s+(\w+)\s+(.+)$").unwrap();
@@ -194,6 +194,12 @@ impl Deref for Labels {
 
     fn deref(&self) -> &Self::Target {
         &self.0
+    }
+}
+
+impl DerefMut for Labels {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
     }
 }
 
